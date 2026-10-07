@@ -1,0 +1,94 @@
+/* 日月食模拟器 —— 系列统一深空玻璃风 */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body, #root { height: 100%; }
+
+body {
+  background: #01040a;
+  color: #d7ecf7;
+  font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+#scene { position: fixed; inset: 0; }
+
+/* ---------- 左上信息面板 ---------- */
+#hud {
+  position: fixed;
+  top: 16px; left: 16px;
+  z-index: 5;
+  width: min(340px, calc(100vw - 32px));
+  padding: 16px 18px 14px;
+  border-radius: 14px;
+  background: rgba(2, 12, 24, .55);
+  border: 1px solid rgba(140, 220, 255, .16);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, .4);
+  font-variant-numeric: tabular-nums;
+}
+#hud h1 {
+  font-size: 15px; font-weight: 800; letter-spacing: .14em;
+  color: #bfeaff; margin-bottom: 10px;
+  text-shadow: 0 0 16px rgba(120, 210, 255, .35);
+}
+.hud-date { font-size: 21px; font-weight: 700; color: #f2fbff; margin-bottom: 12px; }
+.hud-grid, .ev-block {
+  display: grid; grid-template-columns: auto 1fr; gap: 5px 14px;
+  font-size: 12.5px; align-items: baseline;
+}
+.hud-grid { margin-bottom: 10px; }
+.k { color: rgba(160, 205, 226, .75); font-size: 11px; letter-spacing: .18em; }
+.ev { line-height: 1.5; }
+.ev.hit { color: #ffd27a; font-weight: 700; text-shadow: 0 0 14px rgba(255, 190, 80, .4); }
+.ev.miss { color: rgba(190, 220, 236, .75); }
+.ev.na { color: rgba(160, 205, 226, .45); }
+.ev-block { border-top: 1px solid rgba(140, 220, 255, .12); padding-top: 9px; }
+.hud-note { margin-top: 10px; font-size: 10.5px; line-height: 1.6; color: rgba(160, 205, 226, .45); }
+
+/* ---------- 底部控制条 ---------- */
+#controls {
+  position: fixed;
+  left: 50%; bottom: 16px;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex; align-items: center; gap: 7px;
+  padding: 9px 12px;
+  border-radius: 999px;
+  background: rgba(2, 12, 24, .58);
+  border: 1px solid rgba(140, 220, 255, .18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, .45);
+  max-width: calc(100vw - 24px);
+  flex-wrap: wrap; justify-content: center; border-radius: 18px;
+}
+.ctl {
+  cursor: pointer; font: inherit; font-size: 12.5px;
+  color: #bfeaff; letter-spacing: .04em;
+  background: rgba(159, 220, 255, .07);
+  border: 1px solid rgba(159, 220, 255, .28);
+  border-radius: 9px; padding: 6px 12px;
+  transition: background .25s, box-shadow .25s;
+  white-space: nowrap;
+}
+.ctl:hover { background: rgba(159, 220, 255, .16); }
+.ctl.on { background: rgba(159, 220, 255, .26); box-shadow: 0 0 14px rgba(159, 220, 255, .4); }
+.ctl.jump { color: #ffd27a; border-color: rgba(255, 210, 122, .4); }
+.ctl.jump:hover { background: rgba(255, 210, 122, .14); }
+.ctl.play { min-width: 84px; }
+.ctl:disabled { opacity: .5; cursor: wait; }
+.sep { width: 1px; height: 20px; background: rgba(140, 220, 255, .18); }
+#toast {
+  font-size: 12.5px; color: #ffd27a; font-weight: 700;
+  padding: 5px 12px; border-radius: 9px;
+  background: rgba(255, 210, 122, .1); border: 1px solid rgba(255, 210, 122, .35);
+  animation: toast-in .3s ease;
+}
+@keyframes toast-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; } }
+
+@media (max-width: 720px) {
+  #hud { width: calc(100vw - 24px); top: 10px; left: 12px; padding: 12px 14px; }
+  .hud-date { font-size: 17px; }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "eclipse-sim",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "日月食模拟器 —— 真实星历驱动的日-月-地三维食公式可视化（React 19 + Vite 7 + Three.js）",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "three": "^0.165.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.0.0",
+    "vite": "^7.1.0"
+  }
+}
